@@ -7,16 +7,6 @@ export const notFound = ((req:Request, res:Response, next:any) => {
     next(error);
 });
 
-export const handleJson = ((req:Request, res:Response, next:any) => {
-    if (req.body) {
-      try {
-        JSON.parse(req.body);
-      } catch (e) {
-        return res.status(400).send('Invalid JSON');
-      }
-    }
-    next();
-  });
 
 // export const errorHandler = ((err:any, req:Request, res:Response, next:any) => {
 //     const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
