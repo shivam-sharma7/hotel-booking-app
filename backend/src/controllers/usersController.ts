@@ -26,6 +26,7 @@ export const userRegister = async (req: Request, res: Response) => {
       secure: process.env.NODE_ENV === "production", // will return true in production
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
     });
+    res.status(200).send("User created successfully")
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Something went wrong" });
