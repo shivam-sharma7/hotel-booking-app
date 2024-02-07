@@ -10,4 +10,5 @@ router.post("/register", [
     check("password", "Password is required ").isLength({ min: 8 }),
 ], userRegister);
 
+
 export default router;
