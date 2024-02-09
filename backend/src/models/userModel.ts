@@ -10,10 +10,10 @@ export type UserTypes = {
 };
 
 const userSchema = new mongoose.Schema({
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
     firstName: { type: String },
     lastName: { type: String },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
 });
 
 // encrypt password before save
