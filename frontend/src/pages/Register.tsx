@@ -95,7 +95,7 @@ const Register = () => {
         />
       </label>
       {errors.password && (
-        <span className="text-red-500 text-xs">{errors.password.message}</span>
+        <span className="text-red-500 text-xs font-bold">{errors.password.message}</span>
       )}
       <label className="text-gray-600 text-sm font-bold flex-1">
         Confirm Password

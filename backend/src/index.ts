@@ -5,15 +5,20 @@ import { connectDB } from "./config/db";
 import { notFound } from "./middleware/middlewareError";
 import userRoutes from "./routes/usersRoutes";
 import authRoutes from "./routes/auth";
+import coockieParser from "cookie-parser";
  
 
 const PORT = process.env.PORT || 5000;
-const app = express();
+connectDB();
 
-app.use(cors());
+const app = express();
+app.use(coockieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-connectDB();
+app.use(cors({
+  origin: process.env.CORS_ORIGIN, 
+  credentials: true
+}));
 
 app.use("/api/auth", authRoutes)
 app.use('/api/users', userRoutes);
