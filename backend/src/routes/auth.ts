@@ -51,7 +51,7 @@ router.post(
     }
   }
 );
-
+// this route is used to validate the token stored in the http cookie when the user is logged in. 
 router.get("/validate-token", verifyToken,  (req: Request, res: Response) => {
   res.status(200).json({userId: req.userId, message: "Token is valid" });
 });

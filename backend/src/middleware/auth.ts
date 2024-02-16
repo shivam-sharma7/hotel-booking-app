@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
+// This is a declaration merging to add a new property to the Request object
 declare global {
     namespace Express {
         interface Request {
