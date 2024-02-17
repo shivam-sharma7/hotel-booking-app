@@ -47,3 +47,14 @@ export const validateToken = async () => {
     }
     return responseBody;
 };
+
+export const signout = async () => {
+  const responseBody = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+    });
+
+    if (!responseBody.ok) {
+        throw new Error("Error during logout. Please try again.");
+    }
+};

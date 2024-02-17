@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../contexts/AppContext'
+import SignOutButton from './SignOutButton'
 
 const Header = () => {
     const { isLoggedIn } = useAppContext()
@@ -11,9 +12,9 @@ const Header = () => {
                 </span>
                 <span className='flex space-x-2'>
                     {isLoggedIn ? <>
-                        <Link to='/my-bookings' className="text-white font-bold">My Bookings</Link>
-                        <Link to='/my-hotels' className="text-white font-bold">My Hotels</Link>
-                        <button>Sign Out</button>
+                        <Link to='/my-bookings' className="flex items-center text-white font-bold">My Bookings</Link>
+                        <Link to='/my-hotels' className="flex items-center text-white font-bold">My Hotels</Link>
+                         <SignOutButton />
                     </> :
                         <Link to='/sign-in' className="flex items-center px-3  font-bold text-blue-600
                     bg-white hover:bg-gray-300 rounded-full">Sign in</Link>

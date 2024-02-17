@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 
 export type SignInForm = {
@@ -10,7 +10,7 @@ export type SignInForm = {
 };
 
 const SignIn = () => {
-  
+    const queryClient = useQueryClient();  
     const { showToast } = useAppContext()
 
   const {
@@ -24,6 +24,7 @@ const SignIn = () => {
   const mutation = useMutation(apiClient.signIn, {
     onSuccess: async () => {
       showToast({ type: "success", message: "You signed in successfully" });
+      await queryClient.invalidateQueries("validateToken");
       navigate("/");
     },
     onError: (error: Error) => {
@@ -70,7 +71,10 @@ const SignIn = () => {
           </span>
         )}
       </label>
-      <span>
+      <span className="flex flex-col gap-2 items-center">
+        <span className="text-sm">
+          Not Register?  <Link className="underline" to="/register">Create an account</Link>
+        </span>
         <button
           className="bg-blue-500 text-white py-2 px-4
             rounded font-bold hover:bg-blue-800"
