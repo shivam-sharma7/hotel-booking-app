@@ -1,13 +1,13 @@
 import { test, expect } from "@playwright/test";
 
-const FRONTEND_URL = "http://localhost:3000/";
+const FRONTEND_URL = "http://localhost:5000/";
 
 // Sign up test
 test("Should allow the user to sign in", async ({ page }) => {
   await page.goto(FRONTEND_URL);
 
   // get sign in button
-  await page.getByRole("link", { name: "Sign In" }).click();
+  await page.getByRole("link", { name: "Sign in" }).click();
 
   // Expects page to have a heading with the name of Sign In.
   await expect(page.getByRole("heading", { name: "Sign In" })).toBeVisible();
