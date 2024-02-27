@@ -16,9 +16,14 @@ This is a full stack Hotel Booking web app
 ## Set up backend
 >You need to cretae a .env file in backend directory and set following string.
 ```
-MONGO_DB=mongodb+srv://<username>:<password>@hotel-booking.iybejcf.mongodb.net/?retryWrites=true&w=majority
+MONGO_DB=mongodb+srv://<username>:<your_password>@hotel-booking.iybejcf.mongodb.net/?retryWrites=true&w=majority
 
 PORT=5000
+
+# Cloudinary 
+CLOUD_NAME= 
+API_KEY= 
+API_SECRET= 
 ```
 Clone the project 
 ```bash
