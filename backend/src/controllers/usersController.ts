@@ -1,9 +1,8 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/userModel";
+import { User } from "../models/user.Model";
 import { Request, Response } from "express";
 
 export const userRegister = async (req: Request, res: Response) => {
-  
   try {
     let user = await User.findOne({
       email: req.body.email,
@@ -27,7 +26,7 @@ export const userRegister = async (req: Request, res: Response) => {
       secure: process.env.NODE_ENV === "production", // will return true in production
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
     });
-    return res.status(200).send({ message: "User register successfully"});
+    return res.status(200).send({ message: "User register successfully" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Something went wrong" });

@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { User } from "../models/userModel";
+import { User } from "../models/user.Model";
 import { check, validationResult } from "express-validator";
 import bycrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -44,16 +44,18 @@ router.post(
         secure: process.env.NODE_ENV === "production", // will return true in production
         maxAge: 24 * 60 * 60 * 1000, // 24 hours
       });
-        res.status(200).json({ userId: user.id, message: "User logged in successfully"});
+      res
+        .status(200)
+        .json({ userId: user.id, message: "User logged in successfully" });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Something went wrong" });
     }
   }
 );
-// this route is used to validate the token stored in the http cookie when the user is logged in. 
-router.get("/validate-token", verifyToken,  (req: Request, res: Response) => {
-  res.status(200).json({userId: req.userId, message: "Token is valid" });
+// this route is used to validate the token stored in the http cookie when the user is logged in.
+router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+  res.status(200).json({ userId: req.userId, message: "Token is valid" });
 });
 
 router.post("/logout", (req: Request, res: Response) => {
@@ -61,6 +63,6 @@ router.post("/logout", (req: Request, res: Response) => {
     expires: new Date(0),
   });
   res.send("User logged out successfully");
-})
+});
 
 export default router;
