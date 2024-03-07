@@ -5,6 +5,7 @@ import { connectDB } from "./config/db";
 import { notFound } from "./middleware/middlewareError";
 import userRoutes from "./routes/usersRoutes";
 import authRoutes from "./routes/auth";
+import myHotelsRoutes from "./routes/my-hotels";
 import coockieParser from "cookie-parser";
 import path from 'path'
 import { v2 as cloudinary } from "cloudinary";
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, '../../frontend/dist'))); // Serve t
 
 app.use("/api/auth", authRoutes)
 app.use('/api/users', userRoutes);
+app.use('/api/my-hotels', myHotelsRoutes);
 
 app.use(notFound);
 console.log("Current working directory: " + process.cwd()),
