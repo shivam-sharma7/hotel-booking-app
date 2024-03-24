@@ -1,4 +1,4 @@
-import express from "express";
+import express, {Request, Response} from "express";
 import cors from "cors";
 import "dotenv/config";
 import { connectDB } from "./config/db";
@@ -34,6 +34,10 @@ app.use(express.static(path.join(__dirname, '../../frontend/dist'))); // Serve t
 app.use("/api/auth", authRoutes)
 app.use('/api/users', userRoutes);
 app.use('/api/my-hotels', myHotelsRoutes);
+
+app.get("*", (req: Request, res:Response) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'))
+})
 
 app.use(notFound);
 console.log("Current working directory: " + process.cwd()),
