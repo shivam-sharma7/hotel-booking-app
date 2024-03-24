@@ -24,12 +24,12 @@ router.post(
     try {
       const user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).json({ message: "Invalid credentials" });
+        return res.status(400).json({ message: "This account does't exist" });
       }
       // compare the password with the hashed password in the database
       const isMatch = await bycrypt.compare(password, user.password);
       if (!isMatch) {
-        return res.status(400).json({ message: "Invalid credentials" });
+        return res.status(400).json({ message: "please enter right password"});
       }
 
       const token = jwt.sign(
