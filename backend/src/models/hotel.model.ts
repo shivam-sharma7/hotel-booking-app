@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { types } from "util";
 
 export type HotelTypes = {
   _id: string;

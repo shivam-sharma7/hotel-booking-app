@@ -46,3 +46,8 @@ test("should allow user to add a hotel", async ({ page }) => {
   await page.getByRole("button", { name: "Submit" }).click();
   await expect(page.getByText("Hotel added successfully")).toBeVisible({timeout: 30000});
 });
+
+test("should display hotels", async({page})=> {
+  await page.goto(`${FRONTEND_URL}my-hotels`)
+
+})

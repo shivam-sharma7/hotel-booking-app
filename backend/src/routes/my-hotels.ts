@@ -59,9 +59,19 @@ router.post(
 
     } catch (error) {
        console.log("Error while creating hotel", error);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "Error while creating hotel" });
     }
   }
 );
+
+router.get("/", verifyToken, async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find({ userId: req.userId });
+    return res.status(200).send(hotels);
+  } catch (error) {
+    console.log("Error while fetching hotels", error);
+    res.status(500).json({ message: "Error while fetching hetels" });
+  }
+});
 
 export default router;
