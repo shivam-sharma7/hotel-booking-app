@@ -66,7 +66,8 @@ const MyHotelList = () => {
               <Link 
                className="flex bg-blue-500
                text-white font-bold text-xl p-1 hover:bg-blue-700"
-              to={`/edit-hotel/${hotel._id}`}>View details</Link>
+              to={`/edit-hotel/${hotel._id}`}>View Details
+              </Link>
             </span>
           </div>
         ))}

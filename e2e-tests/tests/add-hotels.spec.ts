@@ -50,4 +50,7 @@ test("should allow user to add a hotel", async ({ page }) => {
 test("should display hotels", async({page})=> {
   await page.goto(`${FRONTEND_URL}my-hotels`)
 
+  await expect(page.getByRole("heading", { name: "My Hotels" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Add Hotels" })).toBeVisible();
+
 })
