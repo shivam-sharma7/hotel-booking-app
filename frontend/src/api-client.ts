@@ -86,3 +86,30 @@ export const getMyHotels = async (): Promise<HotelTypes[]> => {
 
     return responseBody.json();
 }
+
+export const getMyHotelById = async (hotelId: string): Promise<HotelTypes> => {
+    const responseBody = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
+        method: "GET",
+        credentials: "include",
+    });
+
+    if (!responseBody.ok) {
+        throw new Error("Error during fetching hotel. Please try again.");
+    }
+
+    return responseBody.json();
+}
+
+export const updateMyHotelById = async (hotelFormData: FormData) => {
+    const responseBody = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelFormData.get("hotelId")}`, {
+        method: "PUT",
+        credentials: "include",
+        body: hotelFormData,
+    });
+
+    if (!responseBody.ok) {
+        throw new Error("Error during updating hotel. Please try again.");
+    }
+
+    return responseBody.json();
+}

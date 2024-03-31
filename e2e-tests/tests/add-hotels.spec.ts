@@ -53,4 +53,15 @@ test("should display hotels", async({page})=> {
   await expect(page.getByRole("heading", { name: "My Hotels" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Add Hotels" })).toBeVisible();
 
-})
+});
+
+test("should allow user to edit a hotel", async ({ page }) => {
+  await page.goto(`${FRONTEND_URL}my-hotels`);
+
+  await page.getByRole("link", { name: " View Details" }).first().click();
+  await page.locator('[name="name"]').fill("Test Hotel Updated");
+
+  await page.getByRole("button", { name: "Submit" }).click();
+
+ 
+});

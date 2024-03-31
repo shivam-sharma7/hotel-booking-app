@@ -64,9 +64,10 @@ const MyHotelList = () => {
             </div>
             <span className="flex justify-end">
               <Link 
-               className="flex bg-blue-500
-               text-white font-bold text-xl p-1 hover:bg-blue-700"
-              to={`/edit-hotel/${hotel._id}`}>View Details
+              to={`/edit-hotel/${hotel._id}`} 
+              className="flex bg-blue-500
+              text-white font-bold text-xl p-1 hover:bg-blue-700">
+               View Details
               </Link>
             </span>
           </div>
