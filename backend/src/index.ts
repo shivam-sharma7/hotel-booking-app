@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth";
 import myHotelsRoutes from "./routes/my-hotels";
 import coockieParser from "cookie-parser";
 import path from 'path'
+import { rateLimiter } from "./middleware/rateLimiter";
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
@@ -21,6 +22,8 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 const app = express();
+
+app.use(rateLimiter); // Apply rate limiter to all requests
 app.use(coockieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
