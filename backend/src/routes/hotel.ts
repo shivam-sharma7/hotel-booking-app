@@ -3,7 +3,7 @@ import { Hotel } from "../models/hotel.model";
 import { HotelTypes } from "../models/hotelTypes";
 const router = express.Router();
 
-type HotelSearchType = {
+export type HotelSearchResponse = {
   data: HotelTypes[];
   pagination: {
     totalHotels: number;
@@ -21,7 +21,7 @@ router.get("/search", async (req: Request, res: Response) => {
 
     const totalHotels = await Hotel.countDocuments();
 
-    const response: HotelSearchType = {
+    const response: HotelSearchResponse = {
       data: hotels,
       pagination: {
         totalHotels,
