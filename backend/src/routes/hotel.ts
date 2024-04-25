@@ -1,16 +1,9 @@
 import express, { Request, Response } from "express";
 import { Hotel } from "../models/hotel.model";
-import { HotelTypes } from "../models/hotelTypes";
+import { HotelSearchResponse } from "./hotelTypes";
 const router = express.Router();
 
-export type HotelSearchResponse = {
-  data: HotelTypes[];
-  pagination: {
-    totalHotels: number;
-    page: number;
-    pages: number;
-  };
-};
+ 
 
 router.get("/search", async (req: Request, res: Response) => {
   try {

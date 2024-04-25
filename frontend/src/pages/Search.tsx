@@ -7,7 +7,7 @@ import SearchCard from "../components/SearchCard";
  
 const Search = () => {
     const search = useSearchContext();
-    const [page, setPage] = useState(1);
+    const [page] = useState(1);
 
     const searchParams = {
         destination: search.destination,
