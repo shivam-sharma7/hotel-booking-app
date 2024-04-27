@@ -46,7 +46,7 @@ const SearchCard = ({ hotel }: HotelProps) => {
             </div>
             <div className="flex flex-col items-end gap-1">
                 <span className="text-sm font-bold">€${hotel.pricePerNight} per night</span>
-                <Link to={`/detail/${hotel._id}`} className="bg-blue-500 hover:bg-blue-600 text-white p-1 rounded">View More</Link>
+                <Link to={`/detail/${hotel._id}`} className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded">View More</Link>
             </div>
         </div>
       </div> 
