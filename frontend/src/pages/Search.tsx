@@ -5,12 +5,14 @@ import * as apiClient from '../api-client'
 import SearchCard from "../components/SearchCard";
 import Pagination from "../components/Pagination";
 import StarRatingFilter from "../components/StarRatingFilter";
+import HotelTypesFilter from "../components/HotelTypesFilter";
 
  
 const Search = () => {
     const search = useSearchContext();
     const [page, setPage] = useState(1);
     const [selectedStars, setSelectedStars] = useState<string[]>([]);
+    const [ selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
 
     const searchParams = {
         destination: search.destination,
@@ -19,7 +21,8 @@ const Search = () => {
         adultsCount: search.adultsCount.toString(),
         childCount: search.childCount.toString(),
         page: page.toString(),
-        stars: selectedStars
+        stars: selectedStars,
+        types: selectedHotelTypes
     };
 
     const {data: hotelData } = useQuery(["searchHotels", searchParams], ()=> apiClient.searchHotels(searchParams))
@@ -32,6 +35,15 @@ const Search = () => {
             setSelectedStars([...selectedStars, value]);
         }
     }
+
+    const handleHotelTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        if (selectedHotelTypes.includes(value)) {
+            setSelectedHotelTypes(selectedHotelTypes.filter((type) => type !== value));
+        } else {
+            setSelectedHotelTypes([...selectedHotelTypes, value]);
+        }
+    }
     
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 ">
@@ -41,6 +53,7 @@ const Search = () => {
             Filters:
           </h3>
           <StarRatingFilter selectedStars={selectedStars} onStarChange={handleStarChange} />
+          <HotelTypesFilter selectedHotelTypes={selectedHotelTypes} onStarChange={handleHotelTypeChange} />
         </div>
       </div>
       <div className="flex flex-col gap-5">
