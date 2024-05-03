@@ -7,6 +7,7 @@ import Pagination from "../components/Pagination";
 import StarRatingFilter from "../components/StarRatingFilter";
 import HotelTypesFilter from "../components/HotelTypesFilter";
 import FacilitiesFilter from "../components/FacilitiesFilter";
+import PriceFilter from "../components/PriceFilter";
 
  
 const Search = () => {
@@ -15,6 +16,7 @@ const Search = () => {
     const [selectedStars, setSelectedStars] = useState<string[]>([]);
     const [ selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
     const [ selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
+    const [selectedPrice, setSelectedPrice] = useState<number | undefined>(undefined);
 
     const searchParams = {
         destination: search.destination,
@@ -26,6 +28,7 @@ const Search = () => {
         stars: selectedStars,
         types: selectedHotelTypes,
         facilities: selectedFacilities,
+        maxPrice: selectedPrice
     };
 
     const {data: hotelData } = useQuery(["searchHotels", searchParams], ()=> apiClient.searchHotels(searchParams))
@@ -56,6 +59,10 @@ const Search = () => {
          setSelectedFacilities([...selectedFacilities, value]);
       }
    }
+
+   const handlePriceChange = (value?: number) => {
+      setSelectedPrice(value);
+   }
   
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 ">
@@ -67,6 +74,7 @@ const Search = () => {
           <StarRatingFilter selectedStars={selectedStars} onStarChange={handleStarChange} />
           <HotelTypesFilter selectedHotelTypes={selectedHotelTypes} onStarChange={handleHotelTypeChange} />
           <FacilitiesFilter selectedFacilities={selectedFacilities} onChange={handleFacilitesChange} />
+          <PriceFilter selectedPrice={selectedPrice} onChange={handlePriceChange} />
         </div>
       </div>
       <div className="flex flex-col gap-5">
