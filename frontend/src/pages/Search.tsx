@@ -29,7 +29,7 @@ const Search = () => {
         stars: selectedStars,
         types: selectedHotelTypes,
         facilities: selectedFacilities,
-        maxPrice: selectedPrice,
+        maxPrice: selectedPrice?.toString(),
         sortOption
     };
 
