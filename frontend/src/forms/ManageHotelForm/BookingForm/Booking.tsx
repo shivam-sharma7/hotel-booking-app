@@ -15,7 +15,7 @@ type BookingFormData = {
 
 const BookingForm = ( { currentLoginUser }: BookingFormProps ) => {
   
-  const { handleSubmit, register } = useForm<BookingFormData>({ 
+  const { register } = useForm<BookingFormData>({ 
     // defaultValues used to pre-populate the form with the currentlogInUser user details
     defaultValues: {
     firstName: currentLoginUser.firstName,
@@ -26,12 +26,12 @@ const BookingForm = ( { currentLoginUser }: BookingFormProps ) => {
 
   return (
      <form className="grid grid-cols-1 gap-6 rounded-lg border border-slate-300">
-      <span className="text-3xl font-bold">Confirm Your Details</span>
+      <span className="text-3xl font-bold px-1">Confirm Your Details</span>
       <div className="grid gride-cols-2 gap-5">
-       <label className="text-gray-700 text-sm font-bold flex-1">
+       <label className="text-gray-700 px-2  text-sm font-bold flex-1">
           First Name
           <input
-          className="mt-1 border rounded w-full px-3  py-2"
+          className="mt-1 border rounded w-full  py-2"
             type="text"
             readOnly
             disabled
@@ -39,10 +39,10 @@ const BookingForm = ( { currentLoginUser }: BookingFormProps ) => {
           />
        </label>
 
-       <label className="text-gray-700 text-sm font-bold flex-1">
+       <label className="text-gray-700 px-2 text-sm font-bold flex-1">
           Last Name
           <input
-          className="mt-1 border rounded w-full px-3  py-2 text-gray-700 "
+          className="mt-1 border rounded w-full   py-2 text-gray-700 "
             type="text"
             readOnly
             disabled
@@ -50,10 +50,10 @@ const BookingForm = ( { currentLoginUser }: BookingFormProps ) => {
           />
         </label>
 
-       <label className="text-gray-700 text-sm font-bold flex-1">
+       <label className="text-gray-700 text-sm px-2 font-bold flex-1">
          Email
           <input
-          className="mt-1 border rounded w-full px-3 py-2 text-gray-700 "
+          className="mt-1 border rounded w-full  py-2 text-gray-700 "
             type="text"
             readOnly
             disabled
