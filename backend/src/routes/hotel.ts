@@ -78,37 +78,41 @@ router.get("/:id",
 });
 
 router.post("/:hotelId/bookings/payment-intent", verifyToken, async (req: Request, res: Response) => {
-  const { numberOfNights } = req.body;
-  const hotelId = req.params.hotelId;
-
-    const hotel = await Hotel.findById(hotelId);
-    if (!hotel) {
-      return res.status(404).json({ message: "Hotel not found" });
-    }
-
-    const totalCost = hotel.pricePerNight * numberOfNights;
-
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalCost,
-      currency: "usd",
-      metadata: {
-        hotelId: hotelId,
-        userId: req.userId,
-      },
-    });
-
-    if (!paymentIntent.client_secret) {
-      return res.status(500).json({ message: "Error while creating payment intent" });
-    }
-
-    const response = {
-      paymentIntentId: paymentIntent.id,
-      clientSecret: paymentIntent.client_secret.toString(),
-      totalCost,
-    };
-    res.status(200).json(response);
-   
-});
+  try {
+    const { numberOfNights } = req.body;
+    const hotelId = req.params.hotelId;
+  
+      const hotel = await Hotel.findById(hotelId);
+      if (!hotel) {
+        return res.status(404).json({ message: "Hotel not found" });
+      }
+  
+      const totalCost = hotel.pricePerNight * numberOfNights;
+  
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: totalCost * 100,
+        currency: "usd",
+        metadata: {
+          hotelId,
+          userId: req.userId,
+        },
+      });
+  
+      if (!paymentIntent.client_secret) {
+        return res.status(500).json({ message: "Error while creating payment intent" });
+      }
+  
+      const response = {
+        paymentIntentId: paymentIntent.id,
+        clientSecret: paymentIntent.client_secret.toString(),
+        totalCost,
+      };
+      res.status(200).json(response);
+    
+  } catch (error) {
+    res.status(500).json({message: "Something went wrong"})
+  }
+})
 
 router.post("/:hotelId/bookings", verifyToken, async (req: Request, res: Response)=> {
    try {
