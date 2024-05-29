@@ -3,6 +3,8 @@ import { SignInForm  } from "./pages/SignIn";
 import { HotelTypes } from "../../backend/src/models/hotelTypes";
 import { HotelSearchResponse } from "../../backend/src/routes/hotelTypes";
 import { UserTypes } from "../../backend/src/models/userTypes"
+import { paymentIntentType } from "../../backend/src/routes/paymentTypes"
+import { BookingFormData } from "./forms/ManageHotelForm/BookingForm/BookingForm";
 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
@@ -194,6 +196,40 @@ export const getHotelById = async (hotelId: string): Promise<HotelTypes> => {
 
     if (!responseBody.ok) {
         throw new Error("Error during fetching hotel. Please try again.");
+    }
+
+    return responseBody.json();
+}
+
+export const createPaymentIntent = async (hotelId: string, numberOfNights: string): Promise<paymentIntentType> => {
+    const responseBody = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}/bookings/payment-intent`, {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify({ numberOfNights }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (!responseBody.ok) {
+        throw new Error("Error during creating payment intent");
+    }
+
+    return responseBody.json();
+}
+
+export const createRoomBooking = async (formData: BookingFormData) => {
+    const responseBody = await fetch(`${API_BASE_URL}/api/hotels/${formData.hotelId}/bookings`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+    });
+
+    if (!responseBody.ok) {
+        throw new Error("Error during booking. Please try again.");
     }
 
     return responseBody.json();
